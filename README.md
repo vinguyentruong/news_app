@@ -1,6 +1,19 @@
-# News App
+## Setup instructions
+- Flutter 3.35.3
+- Run by command line:
+  prod: flutter run --dart-define=ENVIRONMENT=prod
 
-A Flutter news application that provides users with the latest articles, search functionality, bookmarking, and offline access.
+- Or config on debug configuration of android studio by adding above command line on "Addition run args" for each env
+
+## Build apk/api with env
+
+- Run by command line:
+  iOS:
+  flutter build ipa
+
+  Android:
+  flutter build appbundle
+  flutter build apk
 
 ## Core Features
 
@@ -267,25 +280,71 @@ Story 1.1 (News Feed)
     └─→ Story 5.1 (Network Errors)
             └─→ Story 5.2 (Server Errors)
 ```
+## Architecture && State Management
+### Clean Architecture
+   Core
+      - constants
+      - network
+         + dio_client
+      - theme
+         + app_theme.dart
+      - utils
+   data <--- data layer
+      - datasources
+         + local_datasource
+         + remote_datasource
+      - models
+      - repositories (implements) 
+   domain <--- domain layer (business and enterprise)
+      - entities
+      - repositories (interfaces)
+      - use cases
+   presentation <--- application layer
+      - blocs
+      - pages
+      - widgets
+### Bloc
+  - Using flutter_bloc library
+  - Use cubit instead of bloc for simple state management
+  - Use bloc for complex state management
 
-## Technology Stack
+## AI Transparency Log
+ - Tools used: Claude
+ - Main promt:
+ 1. Based on the base features, generate the necessary steps to build the application using Flutter.
+ => Results A
+ 2. Base on Results A, build the application using the clean architecture model, specifically as follows:
+ Core
+ - constants
+ - network
+  + dio_client
+ - theme
+  + app_theme.dart
+ - utils
+data
+ - datasources
+  + local_datasource
+  + remote_datasource
+ - models
+ - repositories (implements) 
+domain
+ - entities
+ - repositories (interfaces)
+ - use cases
+presentation
+ - blocs
+ - pages
+ - widgets
+injection_container.dart
+main.dart
 
-- **Framework**: Flutter
-- **State Management**: (To be determined - BLoC, Provider, or Riverpod)
-- **Local Storage**: sqflite or Hive
-- **HTTP Client**: dio or http package
-- **Connectivity**: connectivity_plus
-- **Web View**: webview_flutter
+Note: use flutter_bloc for state management, ensure clean code and SOLID principles
 
-## Getting Started
+=> Results B and then refactor to meet the requirements of the clean architecture model and UI/UX
 
-This project is a starting point for a Flutter application.
+## Security and Offline data.
+- Use Hive for local database
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Demo
+- GIF: ![Alt Text](news_app_record.gif)
+- Apk: ![Alt Text](app-demo.apk)

@@ -309,38 +309,162 @@ Story 1.1 (News Feed)
   - Use bloc for complex state management
 
 ## AI Transparency Log
+### Tool & promt
  - Tools used: Claude
  - Main promt:
  1. Based on the base features, generate the necessary steps to build the application using Flutter.
+    
  => Results A
- 2. Base on Results A, build the application using the clean architecture model, specifically as follows:
- Core
- - constants
- - network
-  + dio_client
- - theme
-  + app_theme.dart
- - utils
-data
- - datasources
-  + local_datasource
-  + remote_datasource
- - models
- - repositories (implements) 
-domain
- - entities
- - repositories (interfaces)
- - use cases
-presentation
- - blocs
- - pages
- - widgets
-injection_container.dart
-main.dart
+ 
+ 3. Base on Results A, build the application using the clean architecture model, specifically as follows:
+ 
+ - Core
+   - constants
+   - network
+     - dio_client
+   - theme
+     - app_theme.dart
+   - utils
+  - data
+    - datasources
+      - local_datasource
+      - remote_datasource
+    - models
+    - repositories (implements) 
+  - domain
+    - entities
+    - repositories (interfaces)
+    - use cases
+  - presentation
+    - blocs
+    - pages
+    - widgets
+  - injection_container.dart
+  - main.dart
 
 Note: use flutter_bloc for state management, ensure clean code and SOLID principles
 
 => Results B and then refactor to meet the requirements of the clean architecture model and UI/UX
+### Lesson learned/pain point
+1. **Looks correct ≠ Actually correct**
+
+AI-generated code often looks clean and convincing, but:
+  - May contain subtle logic bugs
+  - Edge cases are frequently missed
+  - Assumptions are hidden (e.g., null handling, concurrency)
+
+👉 Lesson: Always treat AI code as a draft, not a solution
+
+2. **Lack of context awareness**
+
+AI doesn’t fully understand your:
+  - Existing architecture (Clean Architecture, layered design, etc.)
+  - Business rules
+  - Project-specific conventions
+
+This leads to:
+  - Inconsistent patterns
+  - Code that “works” but doesn’t fit your system
+
+👉 Lesson: You must provide strong context or refactor heavily
+
+3. **Outdated or mismatched dependencies**
+
+AI may:
+  - Use deprecated APIs
+  - Suggest wrong package versions
+  - Mix patterns from different framework versions
+
+Example:
+  - Old Flutter widgets
+  - Incorrect NestJS decorators
+  - Deprecated TypeORM methods
+
+👉 Lesson: Verify against official docs before trusting
+
+4. ***Over-engineering or under-engineering***
+
+AI tends to:
+  - Overcomplicate simple problems (too many abstractions)
+  - Or oversimplify complex ones (missing scalability)
+
+👉 Lesson: You still need engineering judgment
+
+5. ***Weak error handling & edge cases***
+
+Common gaps:
+  - Missing try/catch
+  - No retry logic
+  - No validation for bad input
+  - Poor handling of async failures
+
+👉 Lesson: Manually harden production code
+
+6. ***Security risks***
+
+AI might generate code that:
+  - Exposes sensitive data
+  - Skips validation/sanitization
+  - Uses insecure patterns
+
+👉 Lesson: Never trust AI for security-critical logic without review
+
+7. ***Inconsistent code style***
+
+You may get:
+  - Mixed naming conventions
+  - Different patterns across files
+  - Hard-to-maintain structure
+
+👉 Lesson: Enforce linting + code review standards
+
+8. ***Hallucinated APIs / functions***
+
+AI sometimes invents:
+  - Functions that don’t exist
+  - Parameters that aren’t valid
+  - Non-existent SDK features
+
+👉 Lesson: If something feels “too perfect,” double-check it
+
+9. ***Poor long-term maintainability***
+
+Generated code often:
+  - Lacks clear intent
+  - Has minimal documentation
+  - Is hard for teams to extend
+
+👉 Lesson: Refactor AI code to match team standards
+
+10. ***Prompt quality = output quality***
+
+Bad prompt → bad code.
+
+Common issues:
+  - Vague requirements → wrong implementation
+  - Missing constraints → wrong architecture
+
+👉 Lesson:
+You’re not just coding—you’re designing prompts
+
+11. ***False sense of productivity***
+
+AI can make you faster initially, but:
+  - Debugging bad generated code can take longer
+  - You may lose deep understanding
+
+👉 Lesson:
+Speed without control can reduce overall productivity
+
+12. ***Testing is often missing***
+
+AI rarely includes:
+  - Unit tests
+  - Integration tests
+  - Edge case coverage
+
+👉 Lesson:
+Always ask for tests—or write them yourself
 
 ## Security and Offline data.
 - Use Hive for local database
